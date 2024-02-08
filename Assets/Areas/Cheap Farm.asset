@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cheap Farm
   m_EditorClassIdentifier: 
   Prefab: {fileID: 2708641244999366320, guid: bbd7d060f735fe74784a593fb407e758, type: 3}
-  plantationSize: {x: 2, y: 3}
+  plantationSize: {x: 2, y: 2}
   cost: 10
   animals: []
   farmDirt: {fileID: 4963004875358323319, guid: a829b6e564de9704c87a0c05f572d8df, type: 3}

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Soil : MonoBehaviour
 {
     public GameObject plant;
+    public GameObject stateText;
 
     PlayerController player;
 
@@ -22,6 +24,11 @@ public class Soil : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
+
+    private void FixedUpdate()
+    {
+        stateText.transform.LookAt(Camera.main.transform);
     }
 
     private void Update()
@@ -51,11 +58,15 @@ public class Soil : MonoBehaviour
         if (Harvestable)
             state = "Can Be Harvested!";
         else if (Growing)
-            state = "Can Be Harvested In: " + (timeToGrow - (int)clock) + "Seconds!";
+            state = "Can Be Harvested In:\n" + (timeToGrow - (int)clock) + " Seconds!";
         else if (CoolingDown)
-            state = "Cooling Down! Ready To Plant In: " + (coolDown - (int)clock) + "Seconds!";
+            state = "Cooling Down! Ready To Plant In:\n" + (coolDown - (int)clock) + " Seconds!";
         else
             state = "Ready To Be Planted!";
+        stateText.GetComponentInChildren<TMP_Text>().text = state;
+
+        if (player.soil != this)
+            stateText.SetActive(false);
     }
 
     public void Action()

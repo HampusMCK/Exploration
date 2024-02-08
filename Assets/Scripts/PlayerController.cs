@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
-    private Soil soil;
+    [NonSerialized]
+    public Soil soil;
 
     Collider other = null;
 
@@ -71,6 +72,8 @@ public class PlayerController : MonoBehaviour
             else
                 soil = null;
         }
+        if (soil != null)
+            soil.stateText.SetActive(true);
     }
 
     private void Update()
@@ -99,7 +102,7 @@ public class PlayerController : MonoBehaviour
         }
         else
             BuyUI.SetActive(false);
-        moneyText.text = money.ToString() + "$";
+        moneyText.text = money + "$\nWheat: " + Wheat + "\nSeeds: " + Seeds;
     }
 
     void GetPlayerInput()

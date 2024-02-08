@@ -24,7 +24,7 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < EmptyAreas.Count; i++)
         {
-            GameObject p = Instantiate(EmptyAreas[i].farmType.Prefab, positions[i], Quaternion.identity);
+            GameObject p = Instantiate(EmptyAreas[i].farmType.Prefab, positions[i], Quaternion.identity, transform);
             p.name = i.ToString();
         }
     }

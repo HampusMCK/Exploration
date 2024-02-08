@@ -35,7 +35,6 @@ public class AreaData : MonoBehaviour
         {
             int.TryParse(name, out int i);
             type = world.EmptyAreas[i].farmType;
-            Debug.Log(name);
         }
     }
 
