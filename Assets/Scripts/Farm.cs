@@ -9,5 +9,6 @@ public class Farm : ScriptableObject
     public Vector2 plantationSize;
     public int cost;
     public string[] animals;
+    public GameObject farmDirt;
 
 }

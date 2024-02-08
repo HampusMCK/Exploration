@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float mouseSensetivity;
 
+    [Header("UI")]
     public GameObject BuyUI;
+    private TMP_Text moneyText;
 
     [NonSerialized]
-    public static int money = 100;
+    public int money = 100, Wheat, Seeds = 5;
 
     float moveX, moveZ, mouseHorizontal, mouseVertical, jumped, moveSpeed;
 
@@ -25,6 +27,13 @@ public class PlayerController : MonoBehaviour
     private Transform cam;
 
     Rigidbody rb;
+
+    Ray ray;
+    RaycastHit hit;
+
+    private Soil soil;
+
+    Collider other = null;
 
     bool isGrounded, releasedJumpKey, releasedBuyKey;
 
@@ -43,6 +52,25 @@ public class PlayerController : MonoBehaviour
     {
         cam = GameObject.Find("Main Camera").transform;
         world = GameObject.Find("World").GetComponent<World>();
+        moneyText = GameObject.Find("Money").GetComponent<TMP_Text>();
+    }
+
+    private void FixedUpdate()
+    {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 100))
+            other = hit.collider;
+        else
+            other = null;
+
+        if (other != null)
+        {
+            if (other.tag == "Farm Slot")
+                soil = other.GetComponent<Soil>();
+            else
+                soil = null;
+        }
     }
 
     private void Update()
@@ -71,6 +99,7 @@ public class PlayerController : MonoBehaviour
         }
         else
             BuyUI.SetActive(false);
+        moneyText.text = money.ToString() + "$";
     }
 
     void GetPlayerInput()
@@ -96,6 +125,9 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetAxisRaw("Activate") == 0)
             releasedBuyKey = true;
+
+        if (Input.GetAxisRaw("Fire1") != 0 && soil != null)
+            soil.Action();
     }
 
     void buyArea()

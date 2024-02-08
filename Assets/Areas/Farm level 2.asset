@@ -17,3 +17,4 @@ MonoBehaviour:
   cost: 15
   animals:
   - sheep
+  farmDirt: {fileID: 4963004875358323319, guid: a829b6e564de9704c87a0c05f572d8df, type: 3}

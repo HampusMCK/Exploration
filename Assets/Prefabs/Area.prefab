@@ -369,6 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 0}
   barier: {fileID: 2883860234927371578}
+  farm: {fileID: 0}
+  farmSpots: []
 --- !u!1 &2883860234927371578
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class AreaData : MonoBehaviour
     World world;
     PlayerController player;
     public GameObject barier;
+    public List<GameObject> farmSpots;
+
+    List<Vector3> corners = new List<Vector3>();
+    Vector3[] verts;
 
     bool bought;
 
@@ -21,10 +26,16 @@ public class AreaData : MonoBehaviour
 
     private void Start()
     {
+        corners.Add(new Vector3(transform.position.x, transform.position.y, transform.position.z));
+        corners.Add(new Vector3(transform.position.x - 20, transform.position.y, transform.position.z));
+        corners.Add(new Vector3(transform.position.x, transform.position.y, transform.position.z + 20));
+        corners.Add(new Vector3(transform.position.x - 20, transform.position.y, transform.position.z + 20));
+        verts = corners.ToArray();
         if (name != "Main")
         {
             int.TryParse(name, out int i);
             type = world.EmptyAreas[i].farmType;
+            Debug.Log(name);
         }
     }
 
@@ -36,6 +47,23 @@ public class AreaData : MonoBehaviour
                     bought = true;
 
         if (bought)
-            barier.SetActive(false);
+        {
+            if (barier.activeSelf)
+                barier.SetActive(false);
+
+            if (farmSpots.Count < type.plantationSize.x * type.plantationSize.y)
+                placeFarm();
+        }
+    }
+
+    void placeFarm()
+    {
+        for (int x = (int)verts[0].x - 1; (x - ((int)verts[0].x - 1)) * -1 < type.plantationSize.x * 2; x -= 2)
+            for (int z = (int)verts[0].z + 1; z - ((int)verts[0].z + 1) < type.plantationSize.y * 2; z += 2)
+            {
+                GameObject g = Instantiate(type.farmDirt, new Vector3(x, 1, z), Quaternion.identity, transform);
+                g.name = "Area: " + name + ", slot: " + ((x - ((int)verts[0].x - 1)) * -1 / 2).ToString() + ", " + ((z - ((int)verts[0].z + 1)) / 2).ToString();
+                farmSpots.Add(g);
+            }
     }
 }
