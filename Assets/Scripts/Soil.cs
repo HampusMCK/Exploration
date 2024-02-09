@@ -28,7 +28,8 @@ public class Soil : MonoBehaviour
 
     private void FixedUpdate()
     {
-        stateText.transform.LookAt(Camera.main.transform);
+        if (stateText.activeSelf)
+            stateText.transform.LookAt(Camera.main.transform);
     }
 
     private void Update()
@@ -55,14 +56,17 @@ public class Soil : MonoBehaviour
             }
         }
 
-        if (Harvestable)
-            state = "Can Be Harvested!";
-        else if (Growing)
-            state = "Can Be Harvested In:\n" + (timeToGrow - (int)clock) + " Seconds!";
-        else if (CoolingDown)
-            state = "Cooling Down! Ready To Plant In:\n" + (coolDown - (int)clock) + " Seconds!";
-        else
-            state = "Ready To Be Planted!";
+        if (stateText.activeSelf)
+        {
+            if (Harvestable)
+                state = "Can Be Harvested!";
+            else if (Growing)
+                state = "Can Be Harvested In:\n" + (timeToGrow - (int)clock) + " Seconds!";
+            else if (CoolingDown)
+                state = "Cooling Down! Ready To Plant In:\n" + (coolDown - (int)clock) + " Seconds!";
+            else
+                state = "Ready To Be Planted!";
+        }
         stateText.GetComponentInChildren<TMP_Text>().text = state;
 
         if (player.soil != this)
@@ -93,7 +97,9 @@ public class Soil : MonoBehaviour
     {
         Harvestable = false;
         CoolingDown = true;
-        player.Wheat++;
+        player.Wheat += player.DamageOnFarm();
         player.Seeds += 2;
+        if (player.Tool != null)
+            player.Tool.durability -= 0.5f;
     }
 }

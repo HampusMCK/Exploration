@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
+    [Header("Areas")]
     public List<Area> EmptyAreas;
     public List<Area> OwnedAreas;
+    
+    [Header("Store")]
+    public List<Tools> ToolsInGame;
 
     public static readonly Vector3[] positions = new Vector3[8]
     {

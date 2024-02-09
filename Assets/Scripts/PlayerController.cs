@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,12 +12,18 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float mouseSensetivity;
 
+    [Header("Object Reference")]
+    public GameObject Hand;
+    MeshFilter HandMesh;
+    MeshRenderer HandMeshRenderer;
+
     [Header("UI")]
     public GameObject BuyUI;
+    public List<GameObject> HotbarSlots;
     private TMP_Text moneyText;
 
     [NonSerialized]
-    public int money = 100, Wheat, Seeds = 5;
+    public int money = 100, Wheat, Seeds = 5, hotbarIndex;
 
     float moveX, moveZ, mouseHorizontal, mouseVertical, jumped, moveSpeed;
 
@@ -33,6 +40,9 @@ public class PlayerController : MonoBehaviour
 
     [NonSerialized]
     public Soil soil;
+    [NonSerialized]
+    public Tools Tool;
+    List<Tools> tools;
 
     Collider other = null;
 
@@ -46,6 +56,8 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        HandMesh = Hand.GetComponent<MeshFilter>();
+        HandMeshRenderer = Hand.GetComponent<MeshRenderer>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -80,6 +92,14 @@ public class PlayerController : MonoBehaviour
     {
         pos = transform.position;
 
+        for (int i = 0; i < tools.Count; i++)
+        {
+            HotbarSlots[i].GetComponentInChildren<Image>().sprite = tools[i].HotbarTexture;
+        }
+
+        if (tools.Count > 0)
+            ChangeTool();
+
         GetPlayerInput();
 
         transform.Translate(movement);
@@ -102,6 +122,7 @@ public class PlayerController : MonoBehaviour
         }
         else
             BuyUI.SetActive(false);
+
         moneyText.text = money + "$\nWheat: " + Wheat + "\nSeeds: " + Seeds;
     }
 
@@ -109,6 +130,7 @@ public class PlayerController : MonoBehaviour
     {
         mouseHorizontal = Input.GetAxisRaw("Mouse X") * mouseSensetivity;
         mouseVertical = Input.GetAxisRaw("Mouse Y") * mouseSensetivity;
+        float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
 
         moveX = Input.GetAxisRaw("Horizontal");
         moveZ = Input.GetAxisRaw("Vertical");
@@ -131,6 +153,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetAxisRaw("Fire1") != 0 && soil != null)
             soil.Action();
+
+        if (scroll != 0)
+        {
+            if (scroll > 0)
+                hotbarIndex++;
+            if (scroll < 0)
+                hotbarIndex--;
+            if (hotbarIndex > 8)
+                hotbarIndex = 0;
+            if (hotbarIndex < 0)
+                hotbarIndex = 8;
+            Tool = tools[hotbarIndex];
+        }
     }
 
     void buyArea()
@@ -150,6 +185,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Sell()
+    {
+        money += Wheat * 5;
+        Wheat = 0;
+    }
+
+    public int DamageOnFarm()
+    {
+        int calculating = 1;
+        if (Tool != null)
+        {
+            if (Tool.type == "Scythe")
+                calculating++;
+            calculating += Tool.level;
+        }
+        return calculating;
+    }
+
+    void ChangeTool()
+    {
+        Tool = tools[hotbarIndex];
+        HandMesh.mesh = Tool.Mesh;
+        HandMeshRenderer.materials = Tool.Mats.ToArray();
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Ground")
@@ -166,6 +226,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Barier")
             area = other.GetComponentInParent<AreaData>();
+
+        if (other.tag == "Sell")
+            Sell();
     }
 
     private void OnTriggerExit(Collider other)
