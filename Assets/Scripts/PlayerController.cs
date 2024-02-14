@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,6 +62,13 @@ public class PlayerController : MonoBehaviour
         cam = GameObject.Find("Main Camera").transform;
         world = GameObject.Find("World").GetComponent<World>();
         moneyText = GameObject.Find("Money").GetComponent<TMP_Text>();
+
+        // if (Directory.Exists(Application.persistentDataPath + "/saves/First/"))
+        // {
+        //     money = World.Instance.data._money;
+        //     Seeds = World.Instance.data._seeds;
+        //     Wheat = World.Instance.data._wheat;
+        // }
     }
 
     private void FixedUpdate()
@@ -87,7 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < tools.Count; i++)
         {
-            HotbarSlots[i].GetComponentInChildren<Image>().sprite = tools[i].HotbarTexture;
+            HotbarSlots[i].GetComponent<Image>().sprite = tools[i].HotbarTexture;
         }
 
         if (tools.Count > 0)
@@ -118,6 +126,14 @@ public class PlayerController : MonoBehaviour
 
         moneyText.text = money + "$\nWheat: " + Wheat + "\nSeeds: " + Seeds;
     }
+
+    // private void OnApplicationQuit()
+    // {
+    //     World.Instance.data.getDataFromPlayer(money, Wheat, Seeds);
+    //     World.Instance.data.getDataFromWorld(World.Instance.areasBought, World.Instance.toolsBought);
+
+    //     SaveSystem.Save(World.Instance.data);
+    // }
 
     void GetPlayerInput()
     {
@@ -167,13 +183,12 @@ public class PlayerController : MonoBehaviour
             return;
         Area _a = null;
         money -= area.type.cost;
-        foreach (Area a in world.EmptyAreas)
+        foreach (Area a in world.Areas)
             if (a.farmType == area.type)
                 _a = a;
         area = null;
         if (_a != null)
         {
-            world.EmptyAreas.Remove(_a);
             world.OwnedAreas.Add(_a);
         }
     }

@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962d04a24e389294184da8f2bffdddf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmptyAreas:
+  Areas:
   - farmType: {fileID: 11400000, guid: 87b4e9ae8ec245f41a24069feafa32e5, type: 2}
   - farmType: {fileID: 11400000, guid: cc61f4075a8d92148b324e44d4e30b5b, type: 2}
   - farmType: {fileID: 11400000, guid: 0ff7a4418ebd6904e8e443083ca716f8, type: 2}
@@ -591,13 +591,14 @@ MonoBehaviour:
   - farmType: {fileID: 11400000, guid: 750d4efc8b43040448b0876de1d80291, type: 2}
   - farmType: {fileID: 11400000, guid: be7c21a7dd58e8146a035f75dc348434, type: 2}
   OwnedAreas: []
+  areasBought: 
   ToolsInGame:
   - {fileID: 11400000, guid: 377422a34a77f7149b4aec58d21a8432, type: 2}
-  savedData:
+  toolsBought: 
+  data:
     worldName: 
-    _emptyAreas: []
-    _boughtAreas: []
-    _tools: []
+    _boughtAreas: 
+    _tools: 
     _money: 0
     _wheat: 0
     _seeds: 0

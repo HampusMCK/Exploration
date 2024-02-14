@@ -34,7 +34,7 @@ public class AreaData : MonoBehaviour
         if (name != "Main")
         {
             int.TryParse(name, out int i);
-            type = world.EmptyAreas[i].farmType;
+            type = world.Areas[i].farmType;
         }
     }
 
