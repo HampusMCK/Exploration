@@ -593,6 +593,14 @@ MonoBehaviour:
   OwnedAreas: []
   ToolsInGame:
   - {fileID: 11400000, guid: 377422a34a77f7149b4aec58d21a8432, type: 2}
+  savedData:
+    worldName: 
+    _emptyAreas: []
+    _boughtAreas: []
+    _tools: []
+    _money: 0
+    _wheat: 0
+    _seeds: 0
 --- !u!4 &244236495
 Transform:
   m_ObjectHideFlags: 0
@@ -2886,6 +2894,14 @@ PrefabInstance:
       propertyPath: BuyUI
       value: 
       objectReference: {fileID: 408883692}
+    - target: {fileID: 2443083118773045965, guid: 97faa21f51619804ea3539c53656b32b, type: 3}
+      propertyPath: tools.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443083118773045965, guid: 97faa21f51619804ea3539c53656b32b, type: 3}
+      propertyPath: tools.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 377422a34a77f7149b4aec58d21a8432, type: 2}
     - target: {fileID: 2443083118773045965, guid: 97faa21f51619804ea3539c53656b32b, type: 3}
       propertyPath: HotbarSlots.Array.size
       value: 9

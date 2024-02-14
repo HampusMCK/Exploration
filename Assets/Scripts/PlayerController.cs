@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -22,14 +21,11 @@ public class PlayerController : MonoBehaviour
     public List<GameObject> HotbarSlots;
     private TMP_Text moneyText;
 
-    [NonSerialized]
-    public int money = 100, Wheat, Seeds = 5, hotbarIndex;
+    [NonSerialized] public int money = 100, Wheat, Seeds = 5, hotbarIndex;
 
     float moveX, moveZ, mouseHorizontal, mouseVertical, jumped, moveSpeed;
 
     Vector3 movement;
-    [NonSerialized]
-    public Vector3 pos;
 
     private Transform cam;
 
@@ -38,11 +34,9 @@ public class PlayerController : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
-    [NonSerialized]
-    public Soil soil;
-    [NonSerialized]
-    public Tools Tool;
-    List<Tools> tools;
+    [NonSerialized] public Soil soil;
+    [NonSerialized] public Tools Tool;
+    public List<Tools> tools;
 
     Collider other = null;
 
@@ -53,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        //Hide cursor on start
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -90,8 +85,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        pos = transform.position;
-
         for (int i = 0; i < tools.Count; i++)
         {
             HotbarSlots[i].GetComponentInChildren<Image>().sprite = tools[i].HotbarTexture;

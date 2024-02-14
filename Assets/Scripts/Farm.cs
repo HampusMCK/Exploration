@@ -10,5 +10,4 @@ public class Farm : ScriptableObject
     public int cost;
     public string[] animals;
     public GameObject farmDirt;
-
 }

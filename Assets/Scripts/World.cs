@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +7,12 @@ public class World : MonoBehaviour
     [Header("Areas")]
     public List<Area> EmptyAreas;
     public List<Area> OwnedAreas;
-    
+
     [Header("Store")]
     public List<Tools> ToolsInGame;
+
+    private static World _world;
+    public static World Instance { get { return _world; } }
 
     public static readonly Vector3[] positions = new Vector3[8]
     {
@@ -23,6 +25,14 @@ public class World : MonoBehaviour
     new Vector3(30f, 0f, 10f),
     new Vector3(30f, 0f, -30f)
     };
+
+    private void Awake()
+    {
+        if (_world != null && _world != this)
+            Destroy(gameObject);
+        else
+            _world = this;
+    }
 
     private void Start()
     {

@@ -50,7 +50,10 @@ MonoBehaviour:
   speed: 4
   jumpForce: 4
   mouseSensetivity: 3
+  Hand: {fileID: 0}
   BuyUI: {fileID: 0}
+  HotbarSlots: []
+  tools: []
 --- !u!54 &8825644279548883566
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -225,7 +228,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4703353420520456747}
-  m_Mesh: {fileID: 5967011128535885709, guid: bd694ec785e13de4285923905188dc13, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &3323952216760573897
 MeshRenderer:
   m_ObjectHideFlags: 0
