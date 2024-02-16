@@ -755,6 +755,7 @@ MonoBehaviour:
   ToolsInGame:
   - {fileID: 11400000, guid: 377422a34a77f7149b4aec58d21a8432, type: 2}
   - {fileID: 11400000, guid: 62fccc620ba1fa04a9c0b2d25d53178c, type: 2}
+  - {fileID: 11400000, guid: ed6604a8dc825ff41a5955cea9b19269, type: 2}
   toolsBought: 
   data:
     worldName: 
@@ -4826,6 +4827,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 239852004715901392, guid: e2e3e1cc4bfd4d64d9fd2ab61436eb7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
     - target: {fileID: 2708641244999366320, guid: e2e3e1cc4bfd4d64d9fd2ab61436eb7b, type: 3}
       propertyPath: m_Name
       value: Main
@@ -4935,17 +4940,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6330594203438631915, guid: fb88723781f5ff5468a7a50c2017fc59, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6670140352414552401, guid: fb88723781f5ff5468a7a50c2017fc59, type: 3}
       propertyPath: m_Name
       value: farmerScytheBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 6670140352414552401, guid: fb88723781f5ff5468a7a50c2017fc59, type: 3}
-      propertyPath: m_TagString
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5073,6 +5070,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97faa21f51619804ea3539c53656b32b, type: 3}
+--- !u!1001 &7529274243252889690
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5939129285241950538, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_Name
+      value: DiamondScytheBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424338906443353072, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ae2c6ca8db081f04da54cdcf9755c89d, type: 3}
 --- !u!1001 &8347092962556678049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5121,17 +5175,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7245441298758300796, guid: fe376935998a1514c96306ac3c3eedec, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8054453556110864070, guid: fe376935998a1514c96306ac3c3eedec, type: 3}
       propertyPath: m_Name
       value: strongerScythe
-      objectReference: {fileID: 0}
-    - target: {fileID: 8054453556110864070, guid: fe376935998a1514c96306ac3c3eedec, type: 3}
-      propertyPath: m_TagString
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5232,3 +5278,4 @@ SceneRoots:
   - {fileID: 8908024067947439220}
   - {fileID: 8347092962556678049}
   - {fileID: 2276800730097913053}
+  - {fileID: 7529274243252889690}

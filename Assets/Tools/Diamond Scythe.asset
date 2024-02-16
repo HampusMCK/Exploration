@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ca657625ad4fda41ab88b57619808e9, type: 3}
-  m_Name: Scythe2
+  m_Name: Diamond Scythe
   m_EditorClassIdentifier: 
-  toolName: Stronger Scythe
+  toolName: Diamond Scythe
   type: Scythe
-  description: Stronger than farmer scythe
-  level: 3
-  cost: 25
-  durability: 14
-  maxDurability: 15
-  Mesh: {fileID: 5872576874337554422, guid: 1983747b4785d934fb007b12e9f1bf0b, type: 3}
+  description: Strongest scythe there is
+  level: 6
+  cost: 40
+  durability: 25
+  maxDurability: 25
+  Mesh: {fileID: 1655533893902417893, guid: 7c8090eaccdab944b81e61bf76abaee1, type: 3}
   Mats:
-  - {fileID: 2100000, guid: 27ff4d43cf146f14a8ef0d6da51aaac7, type: 2}
+  - {fileID: 2100000, guid: ffab039e7e8fcc944b0d59b7b698d2c5, type: 2}
   - {fileID: 2100000, guid: 08a7962f4ef845747bd055c4e78aa3f4, type: 2}
   - {fileID: 2100000, guid: 720308f53cf8a7b47842ff18cc3beae1, type: 2}
-  HotbarTexture: {fileID: 1707546497, guid: fa2313b2dac689141b791966145783a7, type: 3}
+  HotbarTexture: {fileID: 312492972, guid: fa2313b2dac689141b791966145783a7, type: 3}

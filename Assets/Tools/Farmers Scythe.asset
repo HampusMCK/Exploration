@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Weak tool to increase amount of wheat picked up when harvested
   level: 2
   cost: 20
-  durability: 10.5
+  durability: 0
   maxDurability: 10.5
   Mesh: {fileID: -8839368762345780380, guid: bd694ec785e13de4285923905188dc13, type: 3}
   Mats:
