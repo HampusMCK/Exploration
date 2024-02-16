@@ -103,10 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         highlightedHotbar.transform.position = HotbarSlots[hotbarIndex].transform.position;
 
-        if (tools.Count > 0)
-            ChangeTool();
-        else
-            Tool = null;
+        ChangeTool();
 
         if (Tool != null)
             if (Tool.durability <= 0)
@@ -219,6 +216,7 @@ public class PlayerController : MonoBehaviour
         if (money - t.cost < 0)
             return;
 
+        t.durability = t.maxDurability;
         money -= t.cost;
         tools.Add(t);
     }

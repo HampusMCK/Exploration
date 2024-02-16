@@ -39,6 +39,11 @@ public class World : MonoBehaviour
             Destroy(gameObject);
         else
             _world = this;
+
+        foreach (Tools t in ToolsInGame)
+        {
+            t.durability = t.maxDurability;
+        }
     }
 
     private void Start()

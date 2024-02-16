@@ -35,6 +35,12 @@ public class Hotbar : MonoBehaviour
             durability.GetComponent<Slider>().value = tool.durability / tool.maxDurability;
             if (durability.GetComponent<Slider>().value > 0.66f)
                 durability.GetComponentInChildren<Image>().color = new Color(0, 255, 0, 255);
+            
+            if (durability.GetComponent<Slider>().value < 0.66f && durability.GetComponent<Slider>().value > 0.33f)
+                durability.GetComponentInChildren<Image>().color = new Color(255, 150, 0, 255);
+
+            if (durability.GetComponent<Slider>().value < 0.33f && durability.GetComponent<Slider>().value > 0)
+                durability.GetComponentInChildren<Image>().color = new Color(255, 0, 0, 255);
         }
         else
             durability.SetActive(false);
