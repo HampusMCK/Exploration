@@ -15,6 +15,7 @@ public class Tools : ScriptableObject
     public int level;
     public int cost;
     public float durability;
+    public float maxDurability;
 
     [Header("Mesh Data")]
     public Mesh Mesh;

@@ -8,6 +8,9 @@ TagManager:
   - Barier
   - Farm Slot
   - Sell
+  - 0
+  - 1
+  - 2
   layers:
   - Default
   - TransparentFX

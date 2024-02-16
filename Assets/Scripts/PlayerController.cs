@@ -105,6 +105,12 @@ public class PlayerController : MonoBehaviour
 
         if (tools.Count > 0)
             ChangeTool();
+        else
+            Tool = null;
+
+        if (Tool != null)
+            if (Tool.durability <= 0)
+                tools.Remove(Tool);
 
         GetPlayerInput();
 
@@ -209,10 +215,10 @@ public class PlayerController : MonoBehaviour
 
     void buyTool()
     {
-        Tools t = World.Instance.ToolsInGame[index-1];
+        Tools t = World.Instance.ToolsInGame[index - 1];
         if (money - t.cost < 0)
             return;
-        
+
         money -= t.cost;
         tools.Add(t);
     }

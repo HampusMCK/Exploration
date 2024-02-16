@@ -18,6 +18,7 @@ MonoBehaviour:
   level: 3
   cost: 25
   durability: 15
+  maxDurability: 15
   Mesh: {fileID: 5872576874337554422, guid: 1983747b4785d934fb007b12e9f1bf0b, type: 3}
   Mats:
   - {fileID: 2100000, guid: 27ff4d43cf146f14a8ef0d6da51aaac7, type: 2}
