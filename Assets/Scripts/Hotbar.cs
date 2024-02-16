@@ -24,7 +24,10 @@ public class Hotbar : MonoBehaviour
                     slot.GetComponent<Image>().sprite = player.tools[x].HotbarTexture;
                 }
                 else
+                {
                     slot.GetComponent<Image>().enabled = false;
+                    tool = null;
+                }
 
         if (tool != null)
         {
