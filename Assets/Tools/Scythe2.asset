@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ca657625ad4fda41ab88b57619808e9, type: 3}
-  m_Name: Farmers Scythe
+  m_Name: Scythe2
   m_EditorClassIdentifier: 
-  toolName: Farmers Scythe
+  toolName: Stronger Scythe
   type: Scythe
-  description: Weak tool to increase amount of wheat picked up when harvested
-  level: 2
-  cost: 20
-  durability: 12
-  Mesh: {fileID: -8839368762345780380, guid: bd694ec785e13de4285923905188dc13, type: 3}
+  description: Stronger than farmer scythe
+  level: 3
+  cost: 25
+  durability: 15
+  Mesh: {fileID: 5872576874337554422, guid: 1983747b4785d934fb007b12e9f1bf0b, type: 3}
   Mats:
   - {fileID: 2100000, guid: 27ff4d43cf146f14a8ef0d6da51aaac7, type: 2}
   - {fileID: 2100000, guid: 08a7962f4ef845747bd055c4e78aa3f4, type: 2}
-  HotbarTexture: {fileID: 682945792, guid: fa2313b2dac689141b791966145783a7, type: 3}
+  - {fileID: 2100000, guid: 720308f53cf8a7b47842ff18cc3beae1, type: 2}
+  HotbarTexture: {fileID: 1707546497, guid: fa2313b2dac689141b791966145783a7, type: 3}

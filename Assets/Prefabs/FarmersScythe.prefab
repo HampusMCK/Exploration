@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5749101764046019486
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.5355444
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.983796
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.9871662
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27ff4d43cf146f14a8ef0d6da51aaac7, type: 2}
+    - target: {fileID: -7511558181221131132, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 08a7962f4ef845747bd055c4e78aa3f4, type: 2}
+    - target: {fileID: -4157524182732408741, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27ff4d43cf146f14a8ef0d6da51aaac7, type: 2}
+    - target: {fileID: 919132149155446097, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_Name
+      value: FarmersScythe
+      objectReference: {fileID: 0}
+    - target: {fileID: 8032750206264916975, guid: bd694ec785e13de4285923905188dc13, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 08a7962f4ef845747bd055c4e78aa3f4, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bd694ec785e13de4285923905188dc13, type: 3}

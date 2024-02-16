@@ -458,8 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plant: {fileID: 3064008122121900832}
   stateText: {fileID: 4334982627560106183}
-  timeToGrow: 12
-  coolDown: 5
+  timeToGrow: 7
+  coolDown: 2
   state: 
 --- !u!4 &5740948296469551309 stripped
 Transform:

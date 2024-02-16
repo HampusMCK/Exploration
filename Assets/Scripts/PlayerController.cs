@@ -20,9 +20,11 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     public GameObject BuyUI;
     public List<GameObject> HotbarSlots;
+    public GameObject highlightedHotbar;
     private TMP_Text moneyText;
 
-    [NonSerialized] public int money = 100, Wheat, Seeds = 5, hotbarIndex;
+    [NonSerialized] public int money = 100, Wheat, Seeds = 5, hotbarIndex = 0;
+    int index;
 
     float moveX, moveZ, mouseHorizontal, mouseVertical, jumped, moveSpeed;
 
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     Collider other = null;
 
-    bool isGrounded, releasedJumpKey, releasedBuyKey;
+    bool isGrounded, releasedJumpKey, releasedBuyKey, releasedMouse;
 
     private AreaData area;
     private World world;
@@ -73,12 +75,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        other = null;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 100))
             other = hit.collider;
-        else
-            other = null;
 
         if (other != null)
         {
@@ -86,6 +87,13 @@ public class PlayerController : MonoBehaviour
                 soil = other.GetComponent<Soil>();
             else
                 soil = null;
+
+            int.TryParse(other.tag, out index);
+        }
+        else
+        {
+            soil = null;
+            index = 0;
         }
         if (soil != null)
             soil.stateText.SetActive(true);
@@ -93,10 +101,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < tools.Count; i++)
-        {
-            HotbarSlots[i].GetComponent<Image>().sprite = tools[i].HotbarTexture;
-        }
+        highlightedHotbar.transform.position = HotbarSlots[hotbarIndex].transform.position;
 
         if (tools.Count > 0)
             ChangeTool();
@@ -160,8 +165,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxisRaw("Activate") == 0)
             releasedBuyKey = true;
 
-        if (Input.GetAxisRaw("Fire1") != 0 && soil != null)
-            soil.Action();
+        if (Input.GetAxisRaw("Fire1") != 0 && releasedMouse)
+        {
+            releasedMouse = false;
+            if (soil != null)
+                soil.Action();
+
+            if (index != 0)
+                buyTool();
+        }
+
+        if (Input.GetAxisRaw("Fire1") == 0)
+            releasedMouse = true;
 
         if (scroll != 0)
         {
@@ -173,7 +188,6 @@ public class PlayerController : MonoBehaviour
                 hotbarIndex = 0;
             if (hotbarIndex < 0)
                 hotbarIndex = 8;
-            Tool = tools[hotbarIndex];
         }
     }
 
@@ -191,6 +205,16 @@ public class PlayerController : MonoBehaviour
         {
             world.OwnedAreas.Add(_a);
         }
+    }
+
+    void buyTool()
+    {
+        Tools t = World.Instance.ToolsInGame[index-1];
+        if (money - t.cost < 0)
+            return;
+        
+        money -= t.cost;
+        tools.Add(t);
     }
 
     void Sell()
@@ -213,9 +237,17 @@ public class PlayerController : MonoBehaviour
 
     void ChangeTool()
     {
-        Tool = tools[hotbarIndex];
-        HandMesh.mesh = Tool.Mesh;
-        HandMeshRenderer.materials = Tool.Mats.ToArray();
+        if (tools.Count > hotbarIndex)
+        {
+            Tool = tools[hotbarIndex];
+            HandMesh.mesh = Tool.Mesh;
+            HandMeshRenderer.materials = Tool.Mats.ToArray();
+        }
+        else
+        {
+            Tool = null;
+            HandMesh.mesh = null;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
