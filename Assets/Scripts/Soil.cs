@@ -82,15 +82,18 @@ public class Soil : MonoBehaviour
         else if (CoolingDown)
             return;
         else
-            Plant();
+            Plant(0);
     }
 
-    public void Plant()
+    public void Plant(int actor)
     {
-        if (player.Seeds - 1 < 0)
-            return;
+        if (actor == 0)
+        {
+            if (player.Seeds - 1 < 0)
+                return;
+            player.Seeds--;
+        }
         Growing = true;
-        player.Seeds--;
     }
 
     public void Harvest()

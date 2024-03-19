@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     private TMP_Text moneyText;
 
     [NonSerialized] public int money = 100, Wheat, Seeds = 5, hotbarIndex = 0;
-    int index;
+    int ToolToBuyIndex; //Used to decide which tool the raycast is looking at when buying tools
 
-    float moveX, moveZ, mouseHorizontal, mouseVertical, jumped, moveSpeed;
+    float moveX, moveZ, mouseHorizontal, mouseVertical, jumped, moveSpeed; //movement floats
 
     Vector3 movement;
 
@@ -37,15 +37,15 @@ public class PlayerController : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
-    [NonSerialized] public Soil soil;
-    [NonSerialized] public Tools Tool;
-    public List<Tools> tools;
+    [NonSerialized] public Soil soil; //Used to determine which soil the player is looking at
+    [NonSerialized] public Tools Tool; //Tool that is in the hand
+    public List<Tools> tools; //Tools that have been bought
 
-    Collider other = null;
+    Collider other = null; //Used to save the object the raycaster hit
 
-    bool isGrounded, releasedJumpKey, releasedBuyKey, releasedMouse;
+    bool isGrounded, releasedJumpKey, releasedBuyKey, releasedMouse; //Bools to prevent double actions
 
-    private AreaData area;
+    private AreaData area; //Used to determine which area the player is in contact with when buying a new area
     private World world;
 
     private void Awake()
@@ -88,12 +88,12 @@ public class PlayerController : MonoBehaviour
             else
                 soil = null;
 
-            int.TryParse(other.tag, out index);
+            int.TryParse(other.tag, out ToolToBuyIndex);
         }
         else
         {
             soil = null;
-            index = 0;
+            ToolToBuyIndex = 0;
         }
         if (soil != null)
             soil.stateText.SetActive(true);
@@ -145,21 +145,27 @@ public class PlayerController : MonoBehaviour
 
     void GetPlayerInput()
     {
+        //Get mouse activities
         mouseHorizontal = Input.GetAxisRaw("Mouse X") * mouseSensetivity;
         mouseVertical = Input.GetAxisRaw("Mouse Y") * mouseSensetivity;
         float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-
+        //////////////////////////////////////////////////////////////////////
+        
+        //Get movement inputs
         moveX = Input.GetAxisRaw("Horizontal");
         moveZ = Input.GetAxisRaw("Vertical");
+        jumped = Input.GetAxisRaw("Jump");
+        /////////////////////////////////////////////////////////////////////
+        
         movement = new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
 
-        jumped = Input.GetAxisRaw("Jump");
 
         if (Input.GetAxisRaw("Sprint") != 0)
             moveSpeed = speed * 1.5f;
         else
             moveSpeed = speed;
 
+        //Buying a new area input read
         if (Input.GetAxisRaw("Activate") != 0 && BuyUI.activeSelf && releasedBuyKey)
         {
             releasedBuyKey = false;
@@ -167,26 +173,34 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetAxisRaw("Activate") == 0)
             releasedBuyKey = true;
+        //////////////////////////////////////
 
+        //Left Mouse Button input read
         if (Input.GetAxisRaw("Fire1") != 0 && releasedMouse)
         {
             releasedMouse = false;
             if (soil != null)
                 soil.Action();
 
-            if (index != 0)
-                buyTool();
+            if (ToolToBuyIndex != 0)
+                buyTool(ToolToBuyIndex);
         }
 
         if (Input.GetAxisRaw("Fire1") == 0)
             releasedMouse = true;
+        /////////////////////////////////////
+        
 
-        if (scroll != 0)
+        if (scroll != 0)//When scrolling
         {
-            if (scroll > 0)
-                hotbarIndex++;
+            //Scroll through the hotbar
             if (scroll < 0)
+                hotbarIndex++;
+            if (scroll > 0)
                 hotbarIndex--;
+            ////////////////////////////////
+            
+            //If scrolled past hotbar length, jump to other end
             if (hotbarIndex > 8)
                 hotbarIndex = 0;
             if (hotbarIndex < 0)
@@ -194,9 +208,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void buyArea()
+    void buyArea() //Func to buy new area
     {
-        if (money - area.type.cost < 0)
+        if (money - area.type.cost < 0) //If area is to expensive, end function
             return;
         Area _a = null;
         money -= area.type.cost;
@@ -210,10 +224,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void buyTool()
+    void buyTool(int i) //Func to buy new tool
     {
-        Tools t = World.Instance.ToolsInGame[index - 1];
-        if (money - t.cost < 0)
+        Tools t = World.Instance.ToolsInGame[i - 1];
+        if (money - t.cost < 0) //If tool is to expensive end function
             return;
 
         t.durability = t.maxDurability;
@@ -221,25 +235,25 @@ public class PlayerController : MonoBehaviour
         tools.Add(t);
     }
 
-    void Sell()
+    void Sell() //Func to sell wheat
     {
-        money += Wheat * 5;
+        money += Wheat * 3;
         Wheat = 0;
     }
 
-    public int DamageOnFarm()
+    public int DamageOnFarm() //Used to calculate how much wheat will be picked up
     {
         int calculating = 1;
         if (Tool != null)
         {
             if (Tool.type == "Scythe")
-                calculating++;
+                calculating += 2;
             calculating += Tool.level;
         }
         return calculating;
     }
 
-    void ChangeTool()
+    void ChangeTool() //Func to set Tool as the tool in the hotbar index and to display correct mesh
     {
         if (tools.Count > hotbarIndex)
         {

@@ -11,12 +11,15 @@ public class AreaData : MonoBehaviour
     World world;
     PlayerController player;
     public GameObject barier;
-    public List<GameObject> farmSpots;
+    public List<Soil> farmSpots;
 
     List<Vector3> corners = new List<Vector3>();
     Vector3[] verts;
 
+    int seeds, wheat;
+
     bool bought;
+    bool autoFarming;
 
     private void Awake()
     {
@@ -53,6 +56,15 @@ public class AreaData : MonoBehaviour
             if (farmSpots.Count < type.plantationSize.x * type.plantationSize.y)
                 placeFarm();
         }
+
+        if (autoFarming)
+        {
+            foreach(Soil s in farmSpots)
+            {
+                if (!s.Growing && !s.Harvestable && !s.CoolingDown)
+                    s.Plant(1);
+            }
+        }
     }
 
     void placeFarm()
@@ -62,7 +74,7 @@ public class AreaData : MonoBehaviour
             {
                 GameObject g = Instantiate(type.farmDirt, new Vector3(x, 1, z), Quaternion.identity, transform);
                 g.name = "Area: " + name + ", slot: " + ((x - ((int)verts[0].x - 1)) * -1 / 2).ToString() + ", " + ((z - ((int)verts[0].z + 1)) / 2).ToString();
-                farmSpots.Add(g);
+                farmSpots.Add(g.GetComponent<Soil>());
             }
     }
 }
