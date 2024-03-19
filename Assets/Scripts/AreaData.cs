@@ -16,7 +16,7 @@ public class AreaData : MonoBehaviour
     List<Vector3> corners = new List<Vector3>();
     Vector3[] verts;
 
-    int seeds, wheat;
+    public int seeds, wheat;
 
     bool bought;
     bool autoFarming;
@@ -59,10 +59,9 @@ public class AreaData : MonoBehaviour
 
         if (autoFarming)
         {
-            foreach(Soil s in farmSpots)
+            foreach (Soil s in farmSpots)
             {
-                if (!s.Growing && !s.Harvestable && !s.CoolingDown)
-                    s.Plant(1);
+                s.Action(this.gameObject);
             }
         }
     }

@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
         {
             releasedMouse = false;
             if (soil != null)
-                soil.Action();
+                soil.Action(this.gameObject);
 
             if (ToolToBuyIndex != 0)
                 buyTool(ToolToBuyIndex);

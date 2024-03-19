@@ -73,36 +73,58 @@ public class Soil : MonoBehaviour
             stateText.SetActive(false);
     }
 
-    public void Action()
+    public void Action(GameObject instegator)
     {
         if (Growing)
             return;
         else if (Harvestable)
-            Harvest();
+            Harvest(instegator);
         else if (CoolingDown)
             return;
         else
-            Plant(0);
+            Plant(instegator);
     }
 
-    public void Plant(int actor)
+    public void Plant(GameObject instegator)
     {
-        if (actor == 0)
+        PlayerController p = instegator.GetComponent<PlayerController>();
+        AreaData a = instegator.GetComponent<AreaData>();
+
+        if (p != null)
         {
-            if (player.Seeds - 1 < 0)
+            if (p.Seeds - 1 < 0)
                 return;
-            player.Seeds--;
+            p.Seeds--;
+            Growing = true;
         }
-        Growing = true;
+        if (a != null)
+        {
+            if (a.seeds - 1 < 0)
+                return;
+            a.seeds--;
+            Growing = true;
+        }
     }
 
-    public void Harvest()
+    public void Harvest(GameObject instegator)
     {
+        PlayerController p = instegator.GetComponent<PlayerController>();
+        AreaData a = instegator.GetComponent<AreaData>();
+
         Harvestable = false;
         CoolingDown = true;
-        player.Wheat += player.DamageOnFarm();
-        player.Seeds += 2;
-        if (player.Tool != null)
-            player.Tool.durability -= 0.5f;
+
+        if (p != null)
+        {
+            p.Wheat += player.DamageOnFarm();
+            p.Seeds += 2;
+            if (p.Tool != null)
+                p.Tool.durability -= 0.5f;
+        }
+        if (a != null)
+        {
+            a.wheat++;
+            a.seeds += 2;
+        }
     }
 }
