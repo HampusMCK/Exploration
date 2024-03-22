@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [NonSerialized] public Soil soil; //Used to determine which soil the player is looking at
     [NonSerialized] public Tools Tool; //Tool that is in the hand
     public List<Tools> tools; //Tools that have been bought
+    GameObject afb;
 
     Collider other = null; //Used to save the object the raycaster hit
 
@@ -81,8 +82,12 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100))
             other = hit.collider;
 
+
         if (other != null)
         {
+            if (other.tag == "afb")
+                afb = other.gameObject;
+
             if (other.tag == "Farm Slot")
                 soil = other.GetComponent<Soil>();
             else
@@ -150,13 +155,13 @@ public class PlayerController : MonoBehaviour
         mouseVertical = Input.GetAxisRaw("Mouse Y") * mouseSensetivity;
         float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
         //////////////////////////////////////////////////////////////////////
-        
+
         //Get movement inputs
         moveX = Input.GetAxisRaw("Horizontal");
         moveZ = Input.GetAxisRaw("Vertical");
         jumped = Input.GetAxisRaw("Jump");
         /////////////////////////////////////////////////////////////////////
-        
+
         movement = new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
 
 
@@ -184,12 +189,18 @@ public class PlayerController : MonoBehaviour
 
             if (ToolToBuyIndex != 0)
                 buyTool(ToolToBuyIndex);
+
+            if (afb != null)
+            {
+                AreaData ad = afb.GetComponentInParent<AreaData>();
+                ad.ActivateAutoFarming();
+            }
         }
 
         if (Input.GetAxisRaw("Fire1") == 0)
             releasedMouse = true;
         /////////////////////////////////////
-        
+
 
         if (scroll != 0)//When scrolling
         {
@@ -199,7 +210,7 @@ public class PlayerController : MonoBehaviour
             if (scroll > 0)
                 hotbarIndex--;
             ////////////////////////////////
-            
+
             //If scrolled past hotbar length, jump to other end
             if (hotbarIndex > 8)
                 hotbarIndex = 0;

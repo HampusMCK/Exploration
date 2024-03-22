@@ -59,6 +59,7 @@ public class AreaData : MonoBehaviour
 
         if (autoFarming)
         {
+            Debug.Log(bought);
             foreach (Soil s in farmSpots)
             {
                 s.Action(this.gameObject);
@@ -75,5 +76,10 @@ public class AreaData : MonoBehaviour
                 g.name = "Area: " + name + ", slot: " + ((x - ((int)verts[0].x - 1)) * -1 / 2).ToString() + ", " + ((z - ((int)verts[0].z + 1)) / 2).ToString();
                 farmSpots.Add(g.GetComponent<Soil>());
             }
+    }
+
+    public void ActivateAutoFarming()
+    {
+        autoFarming = true;
     }
 }
