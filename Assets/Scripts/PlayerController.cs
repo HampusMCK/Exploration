@@ -117,11 +117,13 @@ public class PlayerController : MonoBehaviour
                 tools.Remove(Tool);
 
         if (!ViewAreaInventory)
+        {
             GetPlayerInput();
+            transform.Translate(movement);
+        }
         else
             GetPlayerUIInput();
 
-        transform.Translate(movement);
 
         if (jumped != 0 && releasedJumpKey && isGrounded)
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);

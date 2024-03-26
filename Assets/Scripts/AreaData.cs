@@ -72,7 +72,6 @@ public class AreaData : MonoBehaviour
 
         if (autoFarming)
         {
-            Debug.Log(bought);
             foreach (Soil s in farmSpots)
             {
                 s.Action(this.gameObject);
