@@ -79,8 +79,9 @@ public class AreaData : MonoBehaviour
             }
         }
 
-        if (InventoryUI.activeSelf)
+        if (showInventory)
         {
+            InventoryUI.SetActive(true);
             seedsTXT.text = seeds.ToString();
             wheatTXT.text = wheat.ToString();
         }
@@ -99,6 +100,7 @@ public class AreaData : MonoBehaviour
 
     public void closeInventoryUI()
     {
+        showInventory = false;
         InventoryUI.SetActive(false);
         player.ViewAreaInventory = false;
     }
@@ -113,7 +115,7 @@ public class AreaData : MonoBehaviour
     {
         int amount = 0;
         int.TryParse(SeedsToDeposit.text, out amount);
-        if (player.Seeds - amount! < 0)
+        if (player.Seeds - amount > -1)
         {
             seeds += amount;
             player.Seeds -= amount;
