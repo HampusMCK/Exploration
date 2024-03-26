@@ -2,24 +2,37 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
 public class AreaData : MonoBehaviour
 {
+    [Header("Area Data")]
     public Farm type;
     World world;
     PlayerController player;
+
+    [Header("Object Reference")]
     public GameObject barier;
+    public GameObject AutoFarmingSign;
+    public GameObject InventoryUI;
+    public TMP_Text seedsTXT;
+    public TMP_Text wheatTXT;
+    public TMP_InputField SeedsToDeposit;
+
+    [Header("Soil")]
     public List<Soil> farmSpots;
 
     List<Vector3> corners = new List<Vector3>();
     Vector3[] verts;
 
+    [Header("Inventory")]
     public int seeds, wheat;
 
     bool bought;
     bool autoFarming;
+    public bool showInventory;
 
     private void Awake()
     {
@@ -65,6 +78,12 @@ public class AreaData : MonoBehaviour
                 s.Action(this.gameObject);
             }
         }
+
+        if (InventoryUI.activeSelf)
+        {
+            seedsTXT.text = seeds.ToString();
+            wheatTXT.text = wheat.ToString();
+        }
     }
 
     void placeFarm()
@@ -78,8 +97,32 @@ public class AreaData : MonoBehaviour
             }
     }
 
+    public void closeInventoryUI()
+    {
+        InventoryUI.SetActive(false);
+        player.ViewAreaInventory = false;
+    }
+
+    public void withdrawWheat()
+    {
+        player.Wheat += wheat;
+        wheat = 0;
+    }
+
+    public void depositSeeds()
+    {
+        int amount = 0;
+        int.TryParse(SeedsToDeposit.text, out amount);
+        if (player.Seeds - amount! < 0)
+        {
+            seeds += amount;
+            player.Seeds -= amount;
+        }
+    }
+
     public void ActivateAutoFarming()
     {
         autoFarming = true;
+        AutoFarmingSign.SetActive(false);
     }
 }

@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
     bool isGrounded, releasedJumpKey, releasedBuyKey, releasedMouse; //Bools to prevent double actions
 
+    public bool ViewAreaInventory;
+
     private AreaData area; //Used to determine which area the player is in contact with when buying a new area
     private World world;
 
@@ -114,7 +116,10 @@ public class PlayerController : MonoBehaviour
             if (Tool.durability <= 0)
                 tools.Remove(Tool);
 
-        GetPlayerInput();
+        if (!ViewAreaInventory)
+            GetPlayerInput();
+        else
+            GetPlayerUIInput();
 
         transform.Translate(movement);
 
@@ -150,6 +155,8 @@ public class PlayerController : MonoBehaviour
 
     void GetPlayerInput()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         //Get mouse activities
         mouseHorizontal = Input.GetAxisRaw("Mouse X") * mouseSensetivity;
         mouseVertical = Input.GetAxisRaw("Mouse Y") * mouseSensetivity;
@@ -219,6 +226,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void GetPlayerUIInput()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     void buyArea() //Func to buy new area
     {
         if (money - area.type.cost < 0) //If area is to expensive, end function
@@ -283,6 +296,12 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
             isGrounded = true;
+
+        if (other.gameObject.tag == "AreaInventory")
+        {
+            other.gameObject.GetComponentInParent<AreaData>().showInventory = true;
+            ViewAreaInventory = true;
+        }
     }
 
     private void OnCollisionExit(Collision other)
